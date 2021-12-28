@@ -1,0 +1,10 @@
+version: '3'
+services:
+  twitter-api_practice:
+    restart: always
+    build: .
+    container_name: 'twitter-api_practice'
+    working_dir: '/usr/src/app/'
+    tty: true
+    volumes:
+      - ./:/usr/src/app
