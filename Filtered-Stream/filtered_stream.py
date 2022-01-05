@@ -13,6 +13,8 @@ def bearer_oauth(r):
     r.headers["Authorization"] = f"Bearer {bearer_token}"
     r.headers["User-Agent"] = "v2FilteredStreamPython"
     return r
+
+# ルールの取得
 def get_rules():
     response = requests.get(
         "https://api.twitter.com/2/tweets/search/stream/rules", auth=bearer_oauth
@@ -24,7 +26,7 @@ def get_rules():
     print(json.dumps(response.json()))
     return response.json()
 
-
+# ルールをリセット
 def delete_all_rules(rules):
     if rules is None or "data" not in rules:
         return None
@@ -44,7 +46,7 @@ def delete_all_rules(rules):
         )
     print(json.dumps(response.json()))
 
-
+# ルールの設定
 def set_rules(delete):
     sample_rules = [
         {"value": "dog has:images", "tag": "dog pictures"},
@@ -64,7 +66,7 @@ def set_rules(delete):
         )
     print(json.dumps(response.json()))
 
-
+# ストリームに接続
 def get_stream(set):
     response = requests.get(
         "https://api.twitter.com/2/tweets/search/stream", auth=bearer_oauth, stream=True,
